@@ -1,4 +1,4 @@
-from manim import *
+from manim import Scene,MathTex,Square,DashedLine,Polygon,Create,YELLOW,WHITE,UP
 
 class Visual2ndDegree(Scene):
 

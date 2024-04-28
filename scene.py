@@ -7,18 +7,14 @@ class Visual2ndDegree(Scene):
 
     def construct(self):
         equation = MathTex(
-            r"x^2+10x=39",
-            substrings_to_isolate="x^2+10x"
+            r"{{x^2+10x}}={{39}}",
             )
         equation.set_color_by_tex("", WHITE)
-        equation.set_color_by_tex("x^2+10x", YELLOW)
         square = Square(5)
         equation.next_to(square,UP)
 
         square_left_x = square.get_x() - square.side_length/2
-        square_right_x = square.get_x() + square.side_length/2
         square_bottom_y = square.get_y() - square.side_length/2
-        square_top_y = square.get_y() + square.side_length/2
 
         self.origin_x = square_left_x
         self.origin_y = square_bottom_y
@@ -44,10 +40,22 @@ class Visual2ndDegree(Scene):
         self.play(Create(square))
         self.play(Create(dashed_vertical),Create(dashed_horizontal))
         self.play(Create(polygon))
-        self.play(polygon.animate.set_fill(YELLOW, opacity = 0.5))
+        self.play(polygon.animate.set_fill(YELLOW, opacity = 0.5),equation[0].animate.set_color(YELLOW))
+        self.wait(duration=3.0,stop_condition=None,frozen_frame=None)
 
     def X(self, x):
         return self.origin_x + x
     
     def Y(self, y):
         return self.origin_y + y
+    
+
+class ColoredLatex(Scene):
+    def construct(self):
+        equation = MathTex(
+            r"{{x^2+10x}}={{39}}",
+            )
+        equation.set_color_by_tex("", WHITE)
+        equation[0].set_color(YELLOW)
+
+        self.add(equation)
